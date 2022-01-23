@@ -1,4 +1,5 @@
 const CONTRACT_NAME = process.env.CONTRACT_NAME ||'share-yours'
+console.log(process.env.CONTRACT_NAME);
 
 function getConfig(env) {
   switch (env) {
