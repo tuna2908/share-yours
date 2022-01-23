@@ -1,0 +1,26 @@
+.divCenter600 {
+  justify-content: center;
+  display: flex;
+  min-width: 600px;
+}
+
+.modalLabel {
+  font-size: 17px;
+  line-height: 25px;
+  margin-top: 20px;
+  color: black;
+}
+
+.modalAVT {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  border-radius: 100px;
+}
+
+.infoArea {
+  border: 0.1px solid #dcdcdc;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 5px;
+}
