@@ -53,5 +53,11 @@ export default {
       type: 'array',
       of: [{ type: 'comment' }],
     },
+    {
+      name: 'ratings',
+      title: 'Ratings',
+      type: 'array',
+      of: [{ type: 'rating' }],
+    },
   ],
 };

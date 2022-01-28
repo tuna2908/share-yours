@@ -48,11 +48,18 @@
   text-align: center;
   transition: color 0.1s, background 0.1s, box-shadow 0.1s;
   box-shadow: 2px 2px 4px #9e9e9e;
-
 }
 
 .attachButton:hover {
   background: #22a0dc;
   color: #dfebf0;
   box-shadow: 5px 5px 5px;
+}
+
+.inputTips {
+  border: 0.1px solid #dcdcdc;
+  padding: 6px;
+  border-radius: 3px;
+  margin: 5px 0 5px 13px;
+  width: 54%;
 }

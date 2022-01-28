@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   ratingVisibility: false,
+  currentPin: null,
 };
 
 export const ratingSlice = createSlice({
@@ -9,12 +10,21 @@ export const ratingSlice = createSlice({
   initialState,
   reducers: {
     onSetModalRatingVisibility: (state, action) => {
-      state.ratingVisibility = action.payload;
+      const { visibility } = action.payload;
+      if (visibility != undefined) state.ratingVisibility = visibility;
+    },
+    onResetPin: (state) => {
+      state.currentPin = null;
+    },
+    onSetPin: (state, action) => {
+      const { pin } = action.payload;
+      if (pin) state.currentPin = pin;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { onSetModalRatingVisibility } = ratingSlice.actions;
+export const { onSetModalRatingVisibility, onResetPin, onSetPin } =
+  ratingSlice.actions;
 
 export default ratingSlice.reducer;

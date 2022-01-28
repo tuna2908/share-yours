@@ -7,26 +7,31 @@ import Button from "@material-tailwind/react/Button";
 import "../../assets/css/modal.css";
 import { AiOutlineUserSwitch } from "react-icons/ai";
 
-import { login, logout } from "../../utils/near";
+import { getAccountInfo, login, logout } from "../../utils/near";
+import { client, urlFor } from "../../client";
 
 export const ModalUserDetails = ({ isOpen = false, closeModal, data }) => {
+  const { _id } = data;
   const [showModal, setShowModal] = useState(false);
-  const [greeting, setGreeting] = useState();
 
-  useEffect(() => {
+  const isAttachedNear = window.walletConnection.isSignedIn();
+
+  useEffect(async () => {
     // in this case, we only care to query the contract when signed in
-    if (window.walletConnection.isSignedIn()) {
+    if (isAttachedNear) {
       // window.contract is set by initContract in index.js
-      window.contract
-        .getGreeting({ accountId: window.accountId })
-        .then((greetingFromContract) => {
-          setGreeting(greetingFromContract);
-        });
-    }
-  }, []);
+      const greetingFromContract = window.contract.getGreeting({
+        accountId: window.accountId,
+      });
+      // setGreeting(greetingFromContract);
 
-  useEffect(() => {
-    console.log({ data });
+      const { accountId } = getAccountInfo();
+      client.patch(_id).set({ nearUser: accountId }).commit();
+    } else client.patch(_id).set({ nearUser: "" }).commit();
+  }, [isAttachedNear]);
+
+  useEffect(async () => {
+    console.log({ data: getAccountInfo() });
     setShowModal(isOpen);
   }, [isOpen]);
 
@@ -55,11 +60,12 @@ export const ModalUserDetails = ({ isOpen = false, closeModal, data }) => {
           <div
             className="attachButton"
             onClick={() => {
-              login();
+              if (isAttachedNear) logout();
+              else login();
             }}
           >
-            {window.walletConnection.isSignedIn()
-              ? `${window.accountId}`
+            {isAttachedNear
+              ? `Unlink ${window.accountId}`
               : "Link NEAR account"}
           </div>
         </div>

@@ -134,7 +134,7 @@ const UserProfile = () => {
             </button>
           </div>
 
-          <div className="px-2">
+          <div className="px-2" key={Math.random()}>
             <MasonryLayout pins={pins} />
           </div>
 

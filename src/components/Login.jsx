@@ -11,8 +11,7 @@ console.log("process.env", process.env.REACT_APP_GOOGLE_API_TOKEN);
 
 const Login = () => {
   const navigate = useNavigate();
-  const responseGoogle = (response) => {
-    console.log({ test: response });
+  const responseGoogle = async (response) => {
     localStorage.setItem("user", JSON.stringify(response.profileObj));
     const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
@@ -21,34 +20,34 @@ const Login = () => {
       userName: name,
       image: imageUrl,
     };
-    client.createIfNotExists(doc).then(() => {
-      navigate("/", { replace: true });
-    });
+
+    await client.createIfNotExists(doc);
+    navigate("/", { replace: true });
   };
 
-  const alternateLogin = () => {
-    const ggResponse = {
-      email: "anhtuck01@gmail.com",
-      familyName: "tu",
-      givenName: "nguyen",
-      googleId: "104431188408191585432",
-      imageUrl:
-        "https://lh3.googleusercontent.com/a-/AOh14Gi7KN6DUBJNvXNTv3UVZx-na7AgHRAY9HERL3ShlQ=s96-c",
-      name: "nguyen tu",
-    };
-    localStorage.setItem("user", JSON.stringify(ggResponse));
+  // const alternateLogin = () => {
+  //   const ggResponse = {
+  //     email: "anhtuck01@gmail.com",
+  //     familyName: "tu",
+  //     givenName: "nguyen",
+  //     googleId: "104431188408191585432",
+  //     imageUrl:
+  //       "https://lh3.googleusercontent.com/a-/AOh14Gi7KN6DUBJNvXNTv3UVZx-na7AgHRAY9HERL3ShlQ=s96-c",
+  //     name: "nguyen tu",
+  //   };
+  //   localStorage.setItem("user", JSON.stringify(ggResponse));
 
-    const doc = {
-      image:
-        "https://lh3.googleusercontent.com/a-/AOh14Gi7KN6DUBJNvXNTv3UVZx-na7AgHRAY9HERL3ShlQ=s96-c",
-      userName: "nguyen tu",
-      _id: "104431188408191585432",
-      _type: "user",
-    };
-    client.createIfNotExists(doc).then(() => {
-      navigate("/", { replace: true });
-    });
-  };
+  //   const doc = {
+  //     image:
+  //       "https://lh3.googleusercontent.com/a-/AOh14Gi7KN6DUBJNvXNTv3UVZx-na7AgHRAY9HERL3ShlQ=s96-c",
+  //     userName: "nguyen tu",
+  //     _id: "104431188408191585432",
+  //     _type: "user",
+  //   };
+  //   client.createIfNotExists(doc).then(() => {
+  //     navigate("/", { replace: true });
+  //   });
+  // };
   return (
     <div className="flex justify-start items-center flex-col h-screen">
       <div className=" relative w-full h-full">

@@ -14,5 +14,10 @@ export default {
       title: 'Image',
       type: 'string',
     },
+    {
+      name: 'nearUser',
+      title: 'NearUser',
+      type: 'string',
+    },
   ],
 };

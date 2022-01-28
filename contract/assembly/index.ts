@@ -12,23 +12,36 @@
  *
  */
 
-import { Context, logging, storage } from 'near-sdk-as'
+import { Context, logging, storage } from "near-sdk-as";
+import { RatingMessage, messages, MessageInfo } from "./models";
 
-const DEFAULT_MESSAGE = 'Hello'
+const DEFAULT_MESSAGE = "Hello";
+const MESSAGE_LIMIT = 10;
 
-// Exported functions will be part of the public interface for your smart contract.
-// Feel free to extract behavior to non-exported functions!
 export function getGreeting(accountId: string): string | null {
-  // This uses raw `storage.get`, a low-level way to interact with on-chain
-  // storage for simple contracts.
-  // If you have something more complex, check out persistent collections:
   // https://docs.near.org/docs/concepts/data-storage#assemblyscript-collection-types
-  return storage.get<string>(accountId, DEFAULT_MESSAGE)
+  return storage.get<string>(accountId, DEFAULT_MESSAGE);
 }
 
 export function setGreeting(message: string): void {
-  const accountId = Context.sender
-  // Use logging.log to record logs permanently to the blockchain!
-  logging.log(`Saving greeting "${message}" for account "${accountId}"`)
-  storage.set(accountId, message)
+  const accountId = Context.sender;
+  logging.log(`Saving greeting "${message}" for account "${accountId}"`);
+  storage.set(accountId, message);
+}
+
+export function addRateMessage(message: MessageInfo): void {
+  // logging.log(message);
+  // console.log(JSON.stringify(messageInfo));
+  const _message = new RatingMessage(message);
+  messages.push(_message);
+}
+
+export function getRateMessages(): RatingMessage[] {
+  const numMessages = min(MESSAGE_LIMIT, messages.length);
+  const startIndex = messages.length - numMessages;
+  const result = new Array<RatingMessage>(numMessages);
+  for (let i = 0; i < numMessages; i++) {
+    result[i] = messages[i + startIndex];
+  }
+  return result;
 }

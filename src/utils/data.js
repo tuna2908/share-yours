@@ -71,6 +71,16 @@ export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
           image
         },
       },
+      ratings[]{
+        rating,
+        donation,
+        _key,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+      }
     } `;
 
 export const pinDetailQuery = (pinId) => {
