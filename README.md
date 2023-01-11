@@ -1,7 +1,23 @@
 share-yours
 ==================
 
-This [React] app was initialized with [create-near-app]
+This [React] app is a DApp for Image NFT Online Gallery using NEAR smart contract assembly as BE
+The app was initialized with [create-near-app]
+
+Tech Stacks
+==================
+The Project has been using
+1. BE server
+- Sanity for Database Service
+- NEAR-SDK writing in Assembly for Smart contracts
+
+2. Web App
+- TailwindCSS and SCSS for styling
+- Redux-toolkit
+- Hooks
+- Sanity Client for APIs
+- NEAR-API-JS for Commiting Smart contract to NEAR Blockchain Network
+- react-google-login for google Oath from client
 
 
 Quick Start
