@@ -3,6 +3,7 @@ share-yours
 
 This [React] app is a DApp for Image NFT Online Gallery using NEAR smart contract assembly as BE
 The app was initialized with [create-near-app]
+My Demo Session about a year ago can be found at: https://youtu.be/9mifhPYdBJs?list=LL&t=2208
 
 Tech Stacks
 ==================
